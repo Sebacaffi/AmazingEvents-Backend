@@ -1,12 +1,19 @@
 const express = require('express')
-const connectDB = require('./db')
+const connect = require('./db')
+const Evento = require('./models/Evento')
+const eventoRouter = require('./router/eventoRouter')
 
 const app = express()
 
-connectDB()
+connect()
+
+//const EventoCreado = new Evento({
+//     name: "Event Name",
+//     description: "Event Description"
+// })
+
+app.use("/api", eventoRouter)
 
 app.listen(3000, ()=>{
-
-    console.log("Activo en el puerto 3000");
-
+    console.log("Activo en el puerto 3000")
 })
