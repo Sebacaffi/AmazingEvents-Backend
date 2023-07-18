@@ -16,7 +16,7 @@ async function getEvents(req, res) {
     }
 }
 
-// Método para encontrar un solo evento
+// Método para encontrar un solo evento de la BD
 async function getOneEvent(req, res) {
     try {
 
@@ -56,7 +56,7 @@ async function createEvent(req, res) {
     }
 }
 
-// Metodo para actualizar un evento completo
+// Metodo para actualizar un evento en la BD
 async function updateEvent(req, res) {
 
     try {
@@ -76,7 +76,7 @@ async function updateEvent(req, res) {
     }
 }
 
-// Método para borrar un eventos de la BD
+// Método para borrar un evento de la BD
 async function deletedEvent(req, res) {
 
     try {
