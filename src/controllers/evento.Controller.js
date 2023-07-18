@@ -1,6 +1,7 @@
 const Evento = require('../models/Evento')
 
-async function getEvents(req, res){
+// Método para obtener todos los eventos de la BD
+async function getEvents(req, res) {
 
     try {
 
@@ -10,16 +11,34 @@ async function getEvents(req, res){
 
     } catch (error) {
 
-        res.status(500).json({error: error.message})
+        res.status(500).json({ error: error.message })
 
     }
 }
 
-async function createEvents(req, res){
+// Método para encontrar un solo evento
+async function getOneEvent(req, res) {
+    try {
+
+        const eventoId = req.params.id; 
+
+        const evento = await Evento.findById(eventoId);
+
+        res.status(200).json(evento);
+
+    } catch (error) {
+
+        res.status(500).json({ error: error.message });
+
+    }
+}
+
+// Método para crear un evento en la BD
+async function createEvent(req, res) {
 
     try {
 
-        const {name, description} = req.body
+        const { name, description } = req.body
 
         const eventoCreado = new Evento({
             name,
@@ -32,54 +51,59 @@ async function createEvents(req, res){
 
     } catch (error) {
 
-        res.status(500).json({error: error.message})
+        res.status(500).json({ error: error.message })
 
     }
 }
 
-async function updateEvents(req, res){
+// Metodo para actualizar un evento completo
+async function updateEvent(req, res) {
 
     try {
 
-        const eventoCreado = new Evento({
-            name: "Evento Matti",
-            description: "nuevo evento Matti"
-        })
+        const eventoId = req.params.id; 
 
-        await eventoCreado.save()
+        const dataEvento = req.body
 
-        res.status(200).json(eventoCreado)
+        const eventoActualizado = await Evento.findByIdAndUpdate(eventoId, dataEvento, {new : true});
+
+        res.status(200).json(eventoActualizado)
 
     } catch (error) {
 
-        res.status(500).json({error: error.message})
+        res.status(500).json({ error: error.message })
 
     }
 }
 
-async function deletedEvents(req, res){
+// Método para borrar un eventos de la BD
+async function deletedEvent(req, res) {
 
     try {
 
-        const eventoCreado = new Evento({
-            name: "Evento Matti",
-            description: "nuevo evento Matti"
-        })
+        const eventoId = req.params.id;
 
-        await eventoCreado.save()
+        const eventoEliminado = await Evento.findByIdAndDelete(eventoId);
 
-        res.status(200).json(eventoCreado)
+        if (!eventoEliminado) {
+
+            return res.status(404).json({ mensaje: 'Evento no encontrado' });
+
+        }
+
+        return res.status(200).json({ mensaje: 'Evento eliminado correctamente' });
 
     } catch (error) {
 
-        res.status(500).json({error: error.message})
+        return res.status(500).json({ error: error.message });
 
     }
 }
 
 module.exports = {
     getEvents,
-    createEvents,
-    updateEvents,
-    deletedEvents
+    getOneEvent,
+    createEvent,
+    updateEvent,
+    deletedEvent
 }
