@@ -1,16 +1,14 @@
 const express = require('express')
 const connect = require('./db')
-const Evento = require('./models/Evento')
 const eventoRouter = require('./router/eventoRouter')
+const bodyParser = require('body-parser')
 
 const app = express()
 
 connect()
 
-//const EventoCreado = new Evento({
-//     name: "Event Name",
-//     description: "Event Description"
-// })
+app.use(bodyParser.urlencoded({ extended: false}))
+app.use(bodyParser.json())
 
 app.use("/api", eventoRouter)
 
