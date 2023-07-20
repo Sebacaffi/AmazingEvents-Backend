@@ -4,7 +4,7 @@ const services = require('../services/eventoService')
 async function getEvents(req, res) {
     try {
         const eventos = await services.getEvents()
-        res.status(200).json(eventos)
+        res.status(200).json("Se obtuvieron los eventos")
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
@@ -17,9 +17,9 @@ async function getOneEvent(req, res) {
         if (eventoId) {
             const evento = await services.getOneEvents(eventoId)
             if (evento) {
-                res.status(200).json(evento)
+                res.status(200).json("Se obtuvieron los eventos")
             } else {
-                res.status(400).json("ID no existe")
+                res.status(404).json("ID no existe")
             }
         } else {
             res.status(400).json("Data Error")
@@ -33,12 +33,12 @@ async function getOneEvent(req, res) {
 async function createEvent(req, res) {
     try {
         const dataEvent = req.body
-        if (dataEvent.name && dataEvent.description) {
+        if (dataEvent.name && dataEvent.category && dataEvent.date && dataEvent.image) {
             const eventoCreado = await services.createEvent(dataEvent)
             if (eventoCreado) {
-                res.status(200).json(eventoCreado)
+                res.status(200).json("Evento creado con éxito")
             } else {
-                res.status(400).json("No se creó le evento")
+                res.status(422).json("Error al crear evento")
             }
         } else {
             res.status(400).json({ message: "Data Error" })
@@ -53,13 +53,13 @@ async function createEvent(req, res) {
 async function updateEvent(req, res) {
     try {
         const eventoId = req.params.id;
-        const dataEvento = req.body
-        if (dataEvento.name && dataEvento.description) {
-            const eventoActualizado = await services.updateEvent(eventoId, dataEvento)
+        const dataEvent = req.body
+        if (dataEvent.name && dataEvent.category && dataEvent.date && dataEvent.image) {
+            const eventoActualizado = await services.updateEvent(eventoId, dataEvent)
             if (eventoActualizado) {
-                res.status(200).json(eventoActualizado)
+                res.status(200).json("Evento actualizado con éxito")
             } else {
-                res.status(400).json("No se actualizó el evento")
+                res.status(422).json("Error al actualizar evento")
             }
         } else {
             res.status(400).json({ message: "Data Error" })
@@ -73,13 +73,13 @@ async function updateEvent(req, res) {
 async function updateParamEvent(req, res) {
     try {
         const eventoId = req.params.id;
-        const dataEvento = req.body
-        if (dataEvento.name || dataEvento.description) {
-            const eventoActualizado = await services.updateEvent(eventoId, dataEvento)
+        const dataEvent = req.body
+        if (dataEvent) {
+            const eventoActualizado = await services.updateEvent(eventoId, dataEvent)
             if (eventoActualizado) {
-                res.status(200).json(eventoActualizado)
+                res.status(200).json("Campos actualizado con éxito")
             } else {
-                res.status(400).json("No se actualizó el evento")
+                res.status(422).json("Error al actualizar campos")
             }
         } else {
             res.status(400).json({ message: "Data Error" })
@@ -98,7 +98,7 @@ async function deletedEvent(req, res) {
             if (eventoEliminado) {
                 res.status(200).json(eventoEliminado)
             } else {
-                res.status(400).json("ID no existe")
+                res.status(404).json("ID no existe")
             }
         } else {
             res.status(400).json("Data Error")

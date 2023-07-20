@@ -1,0 +1,96 @@
+{
+    "openapi": "3.0.0",
+    "info":{
+       "title": "Amazing Events endpoints docs",
+       "version": "1.0.0" 
+    },
+    "paths": {
+        "/api/eventos":{
+            "get":{
+                "summary": "Obtener todos los eventos",
+                "responses":{
+                    "200":{
+                        "description": "Se obtuvieron todos los eventos"
+                    },
+                    "404":{
+                        "description": "ID no existe"
+                    },
+                    "400":{
+                        "description": "Data error"
+                    },
+                    "500":{
+                        "description": "Fallo interno del servidor"
+                    }
+                }
+            },
+            "post":{
+                "summary": "Crear eventos",
+                "responses":{
+                    "200":{
+                        "description": "Evento creado con éxito"
+                    },
+                    "422":{
+                        "description": "Error al crear evento"
+                    },
+                    "400":{
+                        "description": "Data error"
+                    },
+                    "500":{
+                        "description": "Fallo interno del servidor"
+                    }
+                }
+            },
+            "put":{
+                "summary": "Actualizar evento",
+                "responses":{
+                    "200":{
+                        "description": "Evento actualizado con éxito"
+                    },
+                    "422":{
+                        "description": "Error al actualizar evento"
+                    },
+                    "400":{
+                        "description": "Data error"
+                    },
+                    "500":{
+                        "description": "Fallo interno del servidor"
+                    }
+                }
+            },
+            "patch":{
+                "summary": "Actualizar campos evento",
+                "responses":{
+                    "200":{
+                        "description": "Campos actualizado con éxito"
+                    },
+                    "422":{
+                        "description": "Error al actualizar campos"
+                    },
+                    "400":{
+                        "description": "Data error"
+                    },
+                    "500":{
+                        "description": "Fallo interno del servidor"
+                    }
+                }
+            },
+            "delete":{
+                "summary": "Eliminar evento",
+                "responses":{
+                    "200":{
+                        "description": "Evento eliminado con éxito"
+                    },
+                    "404":{
+                        "description": "ID no existe"
+                    },
+                    "400":{
+                        "description": "Data error"
+                    },
+                    "500":{
+                        "description": "Fallo interno del servidor"
+                    }
+                }
+            }
+        }
+    }
+}
