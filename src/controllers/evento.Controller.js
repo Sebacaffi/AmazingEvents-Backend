@@ -46,7 +46,6 @@ async function createEvent(req, res) {
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
-
 }
 
 //Actualizar un evento en la BD
@@ -96,7 +95,7 @@ async function deletedEvent(req, res) {
         if (eventoId) {
             const eventoEliminado = await services.deletedEvent(eventoId)
             if (eventoEliminado) {
-                res.status(200).json(eventoEliminado)
+                res.status(200).json("Evento eliminado con éxito")
             } else {
                 res.status(404).json("ID no existe")
             }
