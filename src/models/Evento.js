@@ -7,8 +7,25 @@ const eventoSchema = new Schema({
         type: String,
         required: true
     },
-    description: String
-})
+    category: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: String,
+        required: true
+    },
+    image: {
+        type: String,
+        required: true
+    },
+    description: String,
+    place: String,
+    price: Number,
+    capacity: Number,
+    assistance: Number,
+    estimate: Number
+});
 
 const Evento = mongoose.model('Evento', eventoSchema)
 

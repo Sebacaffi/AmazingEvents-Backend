@@ -1,0 +1,233 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Amazing Events endpoints docs",
+        "version": "1.0.0"
+    },
+    "paths": {
+        "/api/eventos": {
+            "get": {
+                "summary": "Obtener todos los eventos",
+                "responses": {
+                    "200": {
+                        "description": "Se obtuvieron los eventos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/Evento"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "ID no existe"
+                    },
+                    "400": {
+                        "description": "Data error"
+                    },
+                    "500": {
+                        "description": "Fallo interno del servidor"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Crear/Guardar evento",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Evento"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Evento creado con éxito"
+                    },
+                    "422": {
+                        "description": "Error al crear evento"
+                    },
+                    "400": {
+                        "description": "Data error"
+                    },
+                    "500": {
+                        "description": "Fallo interno del servidor"
+                    }
+                }
+            }
+        },
+        "/api/eventos/:id": {
+            "get": {
+                "summary": "Obtener un evento",
+                "parameters": [
+                    {
+                        "$ref": "#/definitions/Id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Se obtuvo el evento",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/Evento"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "ID no existe"
+                    },
+                    "400": {
+                        "description": "Data error"
+                    },
+                    "500": {
+                        "description": "Fallo interno del servidor"
+                    }
+                }
+            },
+            "put": {
+                "summary": "Actualizar evento",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Evento"
+                        }
+                    },
+                    {
+                        "$ref": "#/definitions/Id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Evento actualizado con éxito"
+                    },
+                    "422": {
+                        "description": "Error al actualizar evento"
+                    },
+                    "400": {
+                        "description": "Data error"
+                    },
+                    "500": {
+                        "description": "Fallo interno del servidor"
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Actualizar campos evento",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Evento"
+                        }
+                    },
+                    {
+                        "$ref": "#/definitions/Id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Campos actualizado con éxito"
+                    },
+                    "422": {
+                        "description": "Error al actualizar campos"
+                    },
+                    "400": {
+                        "description": "Data error"
+                    },
+                    "500": {
+                        "description": "Fallo interno del servidor"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Eliminar evento",
+                "parameters": [
+                    {
+                        "$ref": "#/definitions/Id"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Evento eliminado con éxito"
+                    },
+                    "404": {
+                        "description": "ID no existe"
+                    },
+                    "400": {
+                        "description": "Data error"
+                    },
+                    "500": {
+                        "description": "Fallo interno del servidor"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Evento": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string",
+                    "required": true,
+                    "example": "Evento ejemplo"
+                },
+                "category": {
+                    "type": "string",
+                    "required": true,
+                    "example": "Categoría ejemplo"
+                },
+                "date": {
+                    "type": "string",
+                    "required": true,
+                    "example": "2022-12-31"
+                },
+                "image": {
+                    "type": "string",
+                    "required": true,
+                    "example": "https://cdn.pixabay.com/photo/2014/09/19/14/48/triathlon-452572_1280.jpg"
+                },
+                "description": {
+                    "type": "string",
+                    "example": "Descripción del evento de ejemplo"
+                },
+                "place": {
+                    "type": "string",
+                    "example": "Lugar del evento ejemplo"
+                },
+                "price": {
+                    "type": "number",
+                    "example": 5000
+                },
+                "capacity": {
+                    "type": "number",
+                    "example": 40000
+                },
+                "assistance": {
+                    "type": "number",
+                    "example": 35000
+                },
+                "estimate": {
+                    "type": "number",
+                    "example": 38000
+                }
+            }
+        },
+        "Id": {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "example": "ID asignado en la creación del evento"
+        }
+    }
+}
