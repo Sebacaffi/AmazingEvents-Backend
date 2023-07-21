@@ -5,11 +5,13 @@ const customerRouter = require('./router/customerRouter')
 const bodyParser = require('body-parser')
 const swaggerUi = require('swagger-ui-express')
 const swaggerDocs = require('./api-endpoints.json')
+const cors = require('cors')
 
 const app = express()
 
 connect()
 
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(bodyParser.json())
 

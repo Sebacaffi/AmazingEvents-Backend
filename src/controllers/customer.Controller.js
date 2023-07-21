@@ -33,15 +33,11 @@ async function getOneCustomer(req, res) {
 async function createCustomer(req, res) {
     try {
         const dataCustomer = req.body
-        if (dataCustomer.user && dataCustomer.password && dataCustomer.rol && dataCustomer.email) {
-            const customerCreado = await services.createCustomer(dataCustomer)
-            if (customerCreado) {
-                res.status(200).json("Customer creado con éxito")
-            } else {
-                res.status(422).json("Error al crear customer")
-            }
+        const customerCreado = await services.createCustomer(dataCustomer)
+        if (customerCreado) {
+            res.status(200).json("Customer creado con éxito")
         } else {
-            res.status(400).json({ message: "Data Error" })
+            res.status(422).json("Error al crear customer")
         }
     } catch (error) {
         res.status(500).json({ error: error.message })
