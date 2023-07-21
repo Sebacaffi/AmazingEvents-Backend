@@ -4,7 +4,7 @@ const services = require('../services/eventoService')
 async function getEvents(req, res) {
     try {
         const eventos = await services.getEvents()
-        res.status(200).json("Se obtuvieron los eventos")
+        res.status(200).json(eventos)
     } catch (error) {
         res.status(500).json({ error: error.message })
     }
@@ -17,7 +17,7 @@ async function getOneEvent(req, res) {
         if (eventoId) {
             const evento = await services.getOneEvents(eventoId)
             if (evento) {
-                res.status(200).json("Se obtuvieron los eventos")
+                res.status(200).json(evento)
             } else {
                 res.status(404).json("ID no existe")
             }

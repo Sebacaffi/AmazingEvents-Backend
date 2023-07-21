@@ -23,7 +23,8 @@ const eventoSchema = new Schema({
     place: String,
     price: Number,
     capacity: Number,
-    assistance: Number
+    assistance: Number,
+    estimate: Number
 });
 
 const Evento = mongoose.model('Evento', eventoSchema)
