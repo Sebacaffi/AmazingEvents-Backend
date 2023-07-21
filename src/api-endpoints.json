@@ -63,7 +63,7 @@
                 "summary": "Obtener un evento",
                 "parameters": [
                     {
-                       "$ref": "#/definitions/Id"
+                        "$ref": "#/definitions/Id"
                     }
                 ],
                 "responses": {
@@ -100,7 +100,7 @@
                         }
                     },
                     {
-                       "$ref": "#/definitions/Id"
+                        "$ref": "#/definitions/Id"
                     }
                 ],
                 "responses": {
@@ -130,7 +130,7 @@
                         }
                     },
                     {
-                       "$ref": "#/definitions/Id"
+                        "$ref": "#/definitions/Id"
                     }
                 ],
                 "responses": {
@@ -152,7 +152,7 @@
                 "summary": "Eliminar evento",
                 "parameters": [
                     {
-                       "$ref": "#/definitions/Id"
+                        "$ref": "#/definitions/Id"
                     }
                 ],
                 "responses": {
