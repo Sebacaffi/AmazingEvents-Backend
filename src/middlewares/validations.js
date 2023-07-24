@@ -32,12 +32,10 @@ const eventoSchema = Joi.object({
     assistance: Joi.number()
         .integer()
         .min(1)
-        .max(1000000)
         .max(Joi.ref('capacity')),
     estimate: Joi.number()
         .integer()
         .min(1)
-        .max(1000000)
         .max(Joi.ref('capacity'))
 })
 
