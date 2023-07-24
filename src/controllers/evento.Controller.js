@@ -32,16 +32,12 @@ async function getOneEvent(req, res) {
 //Crear un evento en la BD
 async function createEvent(req, res) {
     try {
-        const dataEvent = req.body
-        if (dataEvent.name && dataEvent.category && dataEvent.date && dataEvent.image) {
-            const eventoCreado = await services.createEvent(dataEvent)
-            if (eventoCreado) {
-                res.status(200).json("Evento creado con éxito")
-            } else {
-                res.status(422).json("Error al crear evento")
-            }
+    const dataEvent = req.body
+    const eventoCreado = await services.createEvent(dataEvent)
+        if (eventoCreado) {
+            res.status(200).json("Evento creado con éxito")
         } else {
-            res.status(400).json({ message: "Data Error" })
+            res.status(422).json("Error al crear evento")
         }
     } catch (error) {
         res.status(500).json({ error: error.message })
@@ -53,17 +49,13 @@ async function updateEvent(req, res) {
     try {
         const eventoId = req.params.id;
         const dataEvent = req.body
-        if (dataEvent.name && dataEvent.category && dataEvent.date && dataEvent.image) {
-            const eventoActualizado = await services.updateEvent(eventoId, dataEvent)
-            if (eventoActualizado) {
-                res.status(200).json("Evento actualizado con éxito")
-            } else {
-                res.status(422).json("Error al actualizar evento")
-            }
+        const eventoActualizado = await services.updateEvent(eventoId, dataEvent)
+        if (eventoActualizado) {
+            res.status(200).json("Evento actualizado con éxito")
         } else {
-            res.status(400).json({ message: "Data Error" })
+            res.status(422).json("Error al actualizar evento")
         }
-    } catch (error) {
+} catch (error) {
         res.status(500).json({ error: error.message })
     }
 }

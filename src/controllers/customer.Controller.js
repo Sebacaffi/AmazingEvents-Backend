@@ -49,15 +49,11 @@ async function updateCustomer(req, res) {
     try {
         const customerId = req.params.id;
         const dataCustomer = req.body
-        if (dataCustomer.user && dataCustomer.password && dataCustomer.rol && dataCustomer.email) {
-            const customerActualizado = await services.updateCustomer(customerId, dataCustomer)
-            if (customerActualizado) {
-                res.status(200).json("Customer actualizado con éxito")
-            } else {
-                res.status(422).json("Error al actualizar customer")
-            }
+        const customerActualizado = await services.updateCustomer(customerId, dataCustomer)
+        if (customerActualizado) {
+            res.status(200).json("Customer actualizado con éxito")
         } else {
-            res.status(400).json({ message: "Data Error" })
+            res.status(422).json("Error al actualizar customer")
         }
     } catch (error) {
         res.status(500).json({ error: error.message })
