@@ -1,22 +1,22 @@
 const services = require('../services/authService')
-const generarToken = require('../middlewares/auth')
+const { generarToken } = require('../middlewares/auth')
 
-async function LoginCustomer(req, res) {
+async function loginCustomer(req, res) {
     try {
         const dataLogin = req.body
         const customer = await services.getOneCustomer(dataLogin.email)
-        if(customer){
-            if(customer.password == dataLogin.password){
+        if (customer) {
+            if (customer.password == dataLogin.password) {
                 let objCustomer = {
                     id: customer._id,
                     email: customer.email
                 }
                 let token = generarToken(objCustomer)
                 res.cookie("customerToken", token).send("Token cargado")
-            }else{
+            } else {
                 res.status(400).json("Usuario o contraseña incorrectos")
-            }            
-        }else{
+            }
+        } else {
             res.status(400).json("Usuario no existe")
         }
     } catch (error) {
@@ -24,6 +24,11 @@ async function LoginCustomer(req, res) {
     }
 }
 
+function logoutCustomer(req, res) {
+    res.clearCookie("customerToken").send("Sesión cerrada")
+}
+
 module.exports = {
-    LoginCustomer
+    loginCustomer,
+    logoutCustomer
 }

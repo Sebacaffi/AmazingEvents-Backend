@@ -7,4 +7,18 @@ const generarToken = (payload) => {
     return token
 }
 
-module.exports = generarToken
+const authenticateToken = (req, res, next) =>{
+    if(req.cookies.customerToken){
+        const verficationToken = jwt.verify(req.cookies.customerToken, secretKey)
+        if(verficationToken){
+            next()
+        }else{
+            res.redirect('/login')
+        }
+    }
+}
+
+module.exports = {
+    generarToken,
+    authenticateToken
+}
