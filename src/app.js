@@ -13,7 +13,10 @@ const app = express()
 
 connect()
 
-app.use(cors())
+app.use(cors({
+    credentials: true,
+    origin: 'http://localhost:5173'
+}))
 app.use(bodyParser.urlencoded({ extended: false}))
 app.use(bodyParser.json())
 app.use(cookieParser())
