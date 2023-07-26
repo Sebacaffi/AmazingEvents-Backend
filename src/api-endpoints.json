@@ -2,11 +2,22 @@
     "openapi": "3.0.0",
     "info": {
         "title": "Amazing Events endpoints docs",
-        "version": "1.0.0"
+        "version": "2.0.0"
     },
+    "tags": [
+        {
+            "name": "Eventos",
+            "description": "Endpoints para los eventos de la API"
+        },
+        {
+            "name": "Customers",
+            "description": "Endpoints para los customers de la API" 
+        }
+    ],
     "paths": {
         "/api/eventos": {
             "get": {
+                "tags": ["Eventos"],
                 "summary": "Obtener todos los eventos",
                 "responses": {
                     "200": {
@@ -31,6 +42,7 @@
                 }
             },
             "post": {
+                "tags": ["Eventos"],
                 "summary": "Crear/Guardar evento",
                 "parameters": [
                     {
@@ -60,10 +72,11 @@
         },
         "/api/eventos/:id": {
             "get": {
+                "tags": ["Eventos"],
                 "summary": "Obtener un evento",
                 "parameters": [
                     {
-                        "$ref": "#/definitions/Id"
+                        "$ref": "#/definitions/EventoId"
                     }
                 ],
                 "responses": {
@@ -89,6 +102,7 @@
                 }
             },
             "put": {
+                "tags": ["Eventos"],
                 "summary": "Actualizar evento",
                 "parameters": [
                     {
@@ -100,7 +114,7 @@
                         }
                     },
                     {
-                        "$ref": "#/definitions/Id"
+                        "$ref": "#/definitions/EventoId"
                     }
                 ],
                 "responses": {
@@ -119,6 +133,7 @@
                 }
             },
             "patch": {
+                "tags": ["Eventos"],
                 "summary": "Actualizar campos evento",
                 "parameters": [
                     {
@@ -130,7 +145,7 @@
                         }
                     },
                     {
-                        "$ref": "#/definitions/Id"
+                        "$ref": "#/definitions/EventoId"
                     }
                 ],
                 "responses": {
@@ -149,10 +164,183 @@
                 }
             },
             "delete": {
+                "tags": ["Eventos"],
                 "summary": "Eliminar evento",
                 "parameters": [
                     {
-                        "$ref": "#/definitions/Id"
+                        "$ref": "#/definitions/EventoId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Evento eliminado con éxito"
+                    },
+                    "404": {
+                        "description": "ID no existe"
+                    },
+                    "400": {
+                        "description": "Data error"
+                    },
+                    "500": {
+                        "description": "Fallo interno del servidor"
+                    }
+                }
+            }
+        },
+        "/api/customers": {
+            "get": {
+                "tags": ["Customers"],
+                "summary": "Obtener todos los eventos",
+                "responses": {
+                    "200": {
+                        "description": "Se obtuvieron los eventos",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/Customer"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "ID no existe"
+                    },
+                    "400": {
+                        "description": "Data error"
+                    },
+                    "500": {
+                        "description": "Fallo interno del servidor"
+                    }
+                }
+            },
+            "post": {
+                "tags": ["Customers"],
+                "summary": "Crear/Guardar evento",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Customer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Evento creado con éxito"
+                    },
+                    "422": {
+                        "description": "Error al crear evento"
+                    },
+                    "400": {
+                        "description": "Data error"
+                    },
+                    "500": {
+                        "description": "Fallo interno del servidor"
+                    }
+                }
+            }
+        },
+        "/api/customers/:id": {
+            "get": {
+                "tags": ["Customers"],
+                "summary": "Obtener un evento",
+                "parameters": [
+                    {
+                        "$ref": "#/definitions/CustomerId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Se obtuvo el evento",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/definitions/Customer"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "ID no existe"
+                    },
+                    "400": {
+                        "description": "Data error"
+                    },
+                    "500": {
+                        "description": "Fallo interno del servidor"
+                    }
+                }
+            },
+            "put": {
+                "tags": ["Customers"],
+                "summary": "Actualizar evento",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Customer"
+                        }
+                    },
+                    {
+                        "$ref": "#/definitions/CustomerId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Evento actualizado con éxito"
+                    },
+                    "422": {
+                        "description": "Error al actualizar evento"
+                    },
+                    "400": {
+                        "description": "Data error"
+                    },
+                    "500": {
+                        "description": "Fallo interno del servidor"
+                    }
+                }
+            },
+            "patch": {
+                "tags": ["Customers"],
+                "summary": "Actualizar campos evento",
+                "parameters": [
+                    {
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/Customer"
+                        }
+                    },
+                    {
+                        "$ref": "#/definitions/CustomerId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Campos actualizado con éxito"
+                    },
+                    "422": {
+                        "description": "Error al actualizar campos"
+                    },
+                    "400": {
+                        "description": "Data error"
+                    },
+                    "500": {
+                        "description": "Fallo interno del servidor"
+                    }
+                }
+            },
+            "delete": {
+                "tags": ["Customers"],
+                "summary": "Eliminar evento",
+                "parameters": [
+                    {
+                        "$ref": "#/definitions/CustomerId"
                     }
                 ],
                 "responses": {
@@ -222,12 +410,44 @@
                 }
             }
         },
-        "Id": {
+        "EventoId": {
             "name": "id",
             "in": "path",
             "required": true,
             "type": "string",
             "example": "ID asignado en la creación del evento"
+        },
+        "Customer": {
+            "type": "object",
+            "properties": {
+                "user": {
+                    "type": "string",
+                    "required": true,
+                    "example": "username"
+                },
+                "password": {
+                    "type": "string",
+                    "required": true,
+                    "example": "123456789/."
+                },
+                "rol": {
+                    "type": "string",
+                    "required": true,
+                    "example": "Coordinador"
+                },
+                "email": {
+                    "type": "string",
+                    "required": true,
+                    "example": "example@email.com"
+                }
+            }
+        },
+        "CustomerId": {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "example": "ID asignado en la creación del customer"
         }
     }
 }
